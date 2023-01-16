@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+
+        <script>
+            function playRound(playerSelection,computerSelection){
+                if (playerSelection == computerSelection) {
+                    alert('its a tie' + ' computer is ' + computerSelection + ' too.')
+                }else if (playerSelection.concat(computerSelection)=='rockscissors'||playerSelection.concat(computerSelection)=='scissorspaper'||playerSelection.concat(computerSelection)=='paperrock'){
+                    alert('player wins' + ' computer is ' + computerSelection)
+                }else {
+                    alert ('computer wins' + ' computer is ' + computerSelection);
+                }
+            }
+            var choices = ['rock','paper','scissors'];
+            const playerSelection = prompt('choose rock or paper or scissors?');
+            var computerSelection = choices[Math.floor(Math.random()*3)];
+            playRound(playerSelection,computerSelection);
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
