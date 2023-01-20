@@ -5,23 +5,144 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="css/style.css" rel="stylesheet">
+        
+        <style>
+            .container{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                width: 100%;
+            }
+            .buttons{
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                width: 100%;
+            }
+            .box{
+                border: 2px solid green;
+                padding: 10px;
+                margin: 5px;
+                cursor: pointer;
+                transition: all 0.4s ease 0s;
+            }
+            .box:hover{
+                color:white;
+                background-color: green;
+            }
+            .display{
+                margin:20px;
+                padding: 10px;
+                border: 2px solid green;
+            }
+            .result{
+                border:2px solid green;
+                display: flex;
+                justify-content:space-around;
+                align-items: center;
+                width:50%
+            }
+            .player,.computer{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+            }
+            
+        </style>
+
 
         <script>
-            function playRound(playerSelection,computerSelection){
+            var playerSelection;
+            var computerSelection;
+            var choices = ['rock','paper','scissors'];
+            var ps = 0;
+            var cs = 0;
+            
+
+            function rock(){
+                playerSelection = 'rock';
+                playRound(playerSelection);
+                
+            };
+            function scissors(){
+                playerSelection = 'scissors';
+                playRound(playerSelection);
+            };
+            function paper(){
+                playerSelection = 'paper';
+                playRound(playerSelection);
+            };
+            function reset(){
+                cs = 0;
+                ps = 0;
+                const pscore = document.querySelector('.pscore');
+                const cscore = document.querySelector('.cscore');
+                cscore.innerHTML = '<span>' + 0 + '<span>';
+                pscore.innerHTML = '<span>' + 0 + '<span>';
+                 
+            }
+
+
+            function playRound(playerSelection){
+
+                const display = document.querySelector('.display');
+                const pscore = document.querySelector('.pscore');
+                const cscore = document.querySelector('.cscore');
+
+                computerSelection = choices[Math.floor(Math.random()*3)];
                 if (playerSelection == computerSelection) {
-                    alert('its a tie' + ' computer is ' + computerSelection + ' too.')
+                    ps = ps + 1;
+                    pscore.innerHTML = '<span>' + ps + '</span>'
+                    display.innerHTML = '<span>' + 'its a tie' + ' computer is ' + computerSelection + ' too.' + '</span>';
                 }else if (playerSelection.concat(computerSelection)=='rockscissors'||playerSelection.concat(computerSelection)=='scissorspaper'||playerSelection.concat(computerSelection)=='paperrock'){
-                    alert('player wins' + ' computer is ' + computerSelection)
+                    ps = ps + 1;
+                    pscore.innerHTML = '<span>' + ps + '</span>'
+                    display.innerHTML = '<span>' + 'player wins' + ' computer is ' + computerSelection + '</span>';
                 }else {
-                    alert ('computer wins' + ' computer is ' + computerSelection);
+                    display.innerHTML = '<span>' + 'computer wins' + ' computer is ' + computerSelection + '</span>';
+                    cs = cs + 1;
+                    cscore.innerHTML = '<span>' + cs + '</span>'
                 }
             }
-            var choices = ['rock','paper','scissors'];
-            const playerSelection = prompt('choose rock or paper or scissors?');
-            var computerSelection = choices[Math.floor(Math.random()*3)];
-            playRound(playerSelection,computerSelection);
+            
+            
+            
+            
         </script>
+        
     </head>
     <body>
+        <div class="container">
+            <div class="display" id="show">
+                You won, computer chose rock
+            </div>
+            <div class="buttons">
+                <div class="box" onclick="rock()">
+                    <h1>Rock</h1>
+                </div>
+                <div class="box" onclick="paper()">
+                    <h1>Paper</h1>
+                </div>
+                <div class="box" onclick="scissors()">
+                    <h1>Scissors</h1>
+                </div>
+            </div>
+            <div class="result">
+                <div class="player">
+                    <h3>YOU</h3>
+                    <div class="pscore">0</div>
+                </div>
+                <div class="computer">
+                    <h3>COMPUTER</h3>
+                    <div class="cscore">0</div>
+                </div>
+            </div>
+            <div class="box" onclick="reset()">
+                <h2>Reset</h2>
+            </div>
+        </div>
     </body>
 </html>
